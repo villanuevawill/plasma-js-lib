@@ -4,7 +4,7 @@
   "description": "PG Plasma JS client library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha --recursive test/",
     "build": "gulp",
     "lint": "./node_modules/.bin/eslint src/"
   },
@@ -38,6 +38,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
     "uuid": "^3.3.2"
   }
 }

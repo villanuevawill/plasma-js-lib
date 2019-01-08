@@ -1,0 +1,23 @@
+const assert = require('chai').assert
+const dummy = require('../src/dummy/dummy-data')
+const DummyProvider = require('../src/providers/dummy-provider')
+
+describe('DummyProvider', async () => {
+  const provider = new DummyProvider()
+  it('should return a transaction by hash', async () => {
+    const hash = '0x0000000000000000000000000000000000000000000000000000000000000001'
+    const tx = await provider.handle('pg_getTransaction', [hash])
+    assert.deepEqual(tx, dummy.DUMMY_TRANSCTIONS[0])
+  })
+  it('should return a block by number', async () => {
+    const number = 1
+    const block = await provider.handle('pg_getBlock', [number])
+    assert.deepEqual(block, dummy.DUMMY_BLOCKS[0])
+  })
+  it('should return several blocks in a range', async () => {
+    const start = 1
+    const end = 5
+    const blocks = await provider.handle('pg_getBlocks', [start, end])
+    assert.deepEqual(blocks, dummy.DUMMY_BLOCKS.slice(0, 5))
+  })
+})

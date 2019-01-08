@@ -11,32 +11,36 @@ class DummyProvider extends BaseProvider {
 
   async handle (method, data) {
     return new Promise((resolve, reject) => {
+      const methods = {
+        'pg_getTransaction': this.getTransaction,
+        'pg_getBlock': this.getBlock,
+        'pg_getBlocks': this.getBlocks
+      }
+
       try {
-        let res
-        switch (method) {
-          case 'pg_getTransaction':
-            res = dummy.DUMMY_TRANSCTIONS.find((tx) => {
-              return tx.hash === data.hash
-            })
-            break
-          case 'pg_getBlock':
-            res = dummy.DUMMY_BLOCKS.find((block) => {
-              return block.number === data.number
-            })
-            break
-          case 'pg_getTransactions':
-            res = dummy.DUMMY_TRANSCTIONS
-            break
-          case 'pg_getBlocks':
-            res = dummy.DUMMY_BLOCKS.filter((block) => {
-              return block.number >= data.start && block.number <= data.end
-            })
-            break
-        }
+        let res = methods[method](...data)
         resolve(res)
       } catch (err) {
         reject(err)
       }
+    })
+  }
+
+  getTransaction (hash) {
+    return dummy.DUMMY_TRANSCTIONS.find((tx) => {
+      return tx.hash === hash
+    })
+  }
+
+  getBlock (block) {
+    return dummy.DUMMY_BLOCKS.find((blk) => {
+      return blk.number === block
+    })
+  }
+
+  getBlocks (start, end) {
+    return dummy.DUMMY_BLOCKS.filter((block) => {
+      return block.number >= start && block.number <= end
     })
   }
 }
