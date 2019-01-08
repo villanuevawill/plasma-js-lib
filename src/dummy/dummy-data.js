@@ -33,42 +33,56 @@ const DUMMY_BLOCKS = [
     value: false,
     number: 1,
     hash: '0x1000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
     value: false,
     number: 2,
     hash: '0x2000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
     value: false,
     number: 3,
     hash: '0x3000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
     value: false,
     number: 4,
     hash: '0x4000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
     value: false,
     number: 5,
     hash: '0x5000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
     value: false,
     number: 6,
     hash: '0x6000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
     value: false,
     number: 7,
     hash: '0x7000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   }
 ]
