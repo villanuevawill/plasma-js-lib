@@ -63,6 +63,14 @@ class PlasmaClient {
   }
 
   /**
+   * Returns the current block height.
+   * @return {Number} Block height.
+   */
+  async getHeight () {
+    return this.provider.handle('pg_getHeight')
+  }
+
+  /**
    * Returns some transactions in a specific block.
    * @param {Number} block Number of the block to query.
    * @param {Number} start First transaction to return.

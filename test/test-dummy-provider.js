@@ -20,4 +20,8 @@ describe('DummyProvider', async () => {
     const blocks = await provider.handle('pg_getBlocks', [start, end])
     assert.deepEqual(blocks, dummy.DUMMY_BLOCKS.slice(0, 5))
   })
+  it('should return the current height', async () => {
+    const height = await provider.handle('pg_getHeight')
+    assert.strictEqual(height, 7)
+  })
 })
