@@ -24,4 +24,11 @@ describe('DummyProvider', async () => {
     const height = await provider.handle('pg_getHeight')
     assert.strictEqual(height, 7)
   })
+  it('should return the transactions in a block', async () => {
+    const block = 1
+    const start = 0
+    const end = 5
+    const txs = await provider.handle('pg_getTransactionsInBlock', [block, start, end])
+    assert.deepEqual(txs, dummy.DUMMY_TRANSCTIONS)
+  })
 })

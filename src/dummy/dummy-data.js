@@ -1,6 +1,5 @@
 const DUMMY_TRANSCTIONS = [
   {
-    value: false,
     hash: '0x0000000000000000000000000000000000000000000000000000000000000001',
     block: 1,
     from: '0x0000000000000000000000000000000000000000',
@@ -9,7 +8,6 @@ const DUMMY_TRANSCTIONS = [
     fee: 0
   },
   {
-    value: false,
     hash: '0x0000000000000000000000000000000000000000000000000000000000000002',
     block: 1,
     from: '0x0000000000000000000000000000000000000000',
@@ -18,7 +16,6 @@ const DUMMY_TRANSCTIONS = [
     fee: 0
   },
   {
-    value: false,
     hash: '0x0000000000000000000000000000000000000000000000000000000000000003',
     block: 1,
     from: '0x0000000000000000000000000000000000000000',
@@ -30,56 +27,56 @@ const DUMMY_TRANSCTIONS = [
 
 const DUMMY_BLOCKS = [
   {
-    value: false,
     number: 1,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x1000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 2,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x2000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 3,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x3000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 4,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x4000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 5,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x5000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 6,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x6000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 7,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x7000000000000000000000000000000000000000000000000000000000000000',
     size: 0,
     timestamp: 1546990851,
