@@ -16,7 +16,8 @@ class DummyProvider extends BaseProvider {
         'pg_getBlock': this.getBlock,
         'pg_getBlocks': this.getBlocks,
         'pg_getHeight': this.getHeight,
-        'pg_getTransactionsInBlock': this.getTransactionsInBlock
+        'pg_getTransactionsInBlock': this.getTransactionsInBlock,
+        'pg_getRecentTransactions': this.getRecentTransactions
       }
 
       try {
@@ -56,6 +57,10 @@ class DummyProvider extends BaseProvider {
     return dummy.DUMMY_TRANSCTIONS.filter((tx) => {
       return tx.block === block
     }).slice(start, end)
+  }
+
+  getRecentTransactions (start, end) {
+    return dummy.DUMMY_TRANSCTIONS.reverse().slice(start, end + 1)
   }
 }
 

@@ -80,6 +80,16 @@ class PlasmaClient {
   async getTransactionsInBlock (block, start, end) {
     return this.provider.handle('pg_getTransactionsInBlock', [block, start, end])
   }
+
+  /**
+   * Returns the most recent transactions.
+   * @param {Number} start First transaction to query.
+   * @param {Number} end Last transaction to query.
+   * @return {Array} A list of transaction objects.
+   */
+  async getRecentTransactions (start, end) {
+    return this.provider.handle('pg_getRecentTransactions', [start, end])
+  }
 }
 
 module.exports = PlasmaClient

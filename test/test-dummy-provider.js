@@ -31,4 +31,10 @@ describe('DummyProvider', async () => {
     const txs = await provider.handle('pg_getTransactionsInBlock', [block, start, end])
     assert.deepEqual(txs, dummy.DUMMY_TRANSCTIONS)
   })
+  it('should return the most recent transactions', async () => {
+    const start = 0
+    const end = 2
+    const txs = await provider.handle('pg_getRecentTransactions', [start, end])
+    assert.deepEqual(txs, dummy.DUMMY_TRANSCTIONS)
+  })
 })
