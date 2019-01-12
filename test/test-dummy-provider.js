@@ -35,6 +35,18 @@ describe('DummyProvider', async () => {
     const start = 0
     const end = 2
     const txs = await provider.handle('pg_getRecentTransactions', [start, end])
-    assert.deepEqual(txs, dummy.DUMMY_TRANSCTIONS)
+    assert.deepEqual(txs, dummy.DUMMY_TRANSCTIONS.slice().reverse())
+  })
+  it('should return an account', async () => {
+    const address = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B'
+    const account = await provider.handle('pg_getAccount', [address])
+    assert.deepEqual(account, dummy.DUMMY_ACCOUNTS[0])
+  })
+  it('should return recent transactions for an account', async () => {
+    const address = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B'
+    const start = 0
+    const end = 2
+    const txs = await provider.handle('pg_getTransactionsByAddress', [address, start, end])
+    assert.deepEqual(txs, dummy.DUMMY_TRANSCTIONS.slice(1, 3))
   })
 })

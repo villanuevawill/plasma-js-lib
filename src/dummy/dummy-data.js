@@ -1,3 +1,15 @@
+const DUMMY_ACCOUNTS = [
+  {
+    address: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
+    balances: [
+      {
+        token: 'ETH',
+        amount: 350003
+      }
+    ]
+  }
+]
+
 const DUMMY_TRANSCTIONS = [
   {
     hash: '0x0000000000000000000000000000000000000000000000000000000000000001',
@@ -19,7 +31,7 @@ const DUMMY_TRANSCTIONS = [
     transfers: [
       {
         sender: '0x0000000000000000000000000000000000000000',
-        recipient: '0x0000000000000000000000000000000000000000',
+        recipient: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
         token: 'ETH',
         amount: 100,
         start: 0,
@@ -32,7 +44,7 @@ const DUMMY_TRANSCTIONS = [
     block: 1,
     transfers: [
       {
-        sender: '0x0000000000000000000000000000000000000000',
+        sender: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
         recipient: '0x0000000000000000000000000000000000000000',
         token: 'ETH',
         amount: 100,
@@ -104,5 +116,6 @@ const DUMMY_BLOCKS = [
 
 module.exports = {
   DUMMY_TRANSCTIONS,
-  DUMMY_BLOCKS
+  DUMMY_BLOCKS,
+  DUMMY_ACCOUNTS
 }

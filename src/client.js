@@ -90,6 +90,26 @@ class PlasmaClient {
   async getRecentTransactions (start, end) {
     return this.provider.handle('pg_getRecentTransactions', [start, end])
   }
+
+  /**
+   * Returns information about an account by address.
+   * @param {String} address An account address.
+   * @return {*} The account object.
+   */
+  async getAccount (address) {
+    return this.provider.handle('pg_getAccount', [address])
+  }
+
+  /**
+   * Returns transactions where an address is either the sender or recipient.
+   * @param {*} address An account address.
+   * @param {*} start First transaction to query.
+   * @param {*} end Last transaction to query.
+   * @return {Array} A list of transaction objects.
+   */
+  async getTransactionsByAddress (address, start, end) {
+    return this.provider.handle('pg_getTransactionsByAddress', [address, start, end])
+  }
 }
 
 module.exports = PlasmaClient

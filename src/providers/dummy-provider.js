@@ -17,7 +17,9 @@ class DummyProvider extends BaseProvider {
         'pg_getBlocks': this.getBlocks,
         'pg_getHeight': this.getHeight,
         'pg_getTransactionsInBlock': this.getTransactionsInBlock,
-        'pg_getRecentTransactions': this.getRecentTransactions
+        'pg_getRecentTransactions': this.getRecentTransactions,
+        'pg_getAccount': this.getAccount,
+        'pg_getTransactionsByAddress': this.getTransactionsByAddress
       }
 
       try {
@@ -60,7 +62,21 @@ class DummyProvider extends BaseProvider {
   }
 
   getRecentTransactions (start, end) {
-    return dummy.DUMMY_TRANSCTIONS.reverse().slice(start, end + 1)
+    return dummy.DUMMY_TRANSCTIONS.slice().reverse().slice(start, end + 1)
+  }
+
+  getAccount (address) {
+    return dummy.DUMMY_ACCOUNTS.find((account) => {
+      return account.address === address
+    })
+  }
+
+  getTransactionsByAddress (address, start, end) {
+    return dummy.DUMMY_TRANSCTIONS.filter((tx) => {
+      return tx.transfers.some((transfer) => {
+        return transfer.sender === address || transfer.recipient === address
+      })
+    }).slice(start, end + 1)
   }
 }
 
