@@ -1,4 +1,6 @@
 # plasma-js-lib
+[![Coverage Status](https://coveralls.io/repos/github/plasma-group/plasma-js-lib/badge.svg?branch=master)](https://coveralls.io/github/plasma-group/plasma-js-lib?branch=master) [![Build Status](https://travis-ci.org/plasma-group/plasma-js-lib.svg?branch=master)](https://travis-ci.org/plasma-group/plasma-js-lib)
+
 `plasma-js-lib` is a JavaScript client library for interacting with PG Plasma nodes. `plasma-js-lib` effectively wraps the JSON-RPC interface that our plasma nodes expose and provides a nice API for app developers to work with.
 
 ## Installation

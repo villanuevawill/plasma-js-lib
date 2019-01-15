@@ -1,15 +1,16 @@
 language: node_js
 node_js:
-  - "6"
   - "8"
   - "10"
+  - "node"
+
+cache:
+  - npm
 
 install:
   - npm install
+
 script:
   - npm run build
   - npm run lint
-  - npm test
-
-cache:
-  npm: true
+  - npm test.coverage
