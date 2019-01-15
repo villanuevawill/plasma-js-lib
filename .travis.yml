@@ -13,4 +13,4 @@ install:
 script:
   - npm run build
   - npm run lint
-  - npm test.coverage
+  - npm run test.coverage
