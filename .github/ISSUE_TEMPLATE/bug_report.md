@@ -23,9 +23,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Specifications**
- - Version:
- - OS:
- - Node Version:
+- Version:
+- OS:
+- Node Version:
 
 **Additional context**
 Add any other context about the problem here.

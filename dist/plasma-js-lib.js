@@ -1798,6 +1798,14 @@ class PlasmaClient {
   }
 
   /**
+   * Returns the current block height.
+   * @return {Number} Block height.
+   */
+  async getHeight () {
+    return this.provider.handle('pg_getHeight')
+  }
+
+  /**
    * Returns some transactions in a specific block.
    * @param {Number} block Number of the block to query.
    * @param {Number} start First transaction to return.
@@ -1807,89 +1815,161 @@ class PlasmaClient {
   async getTransactionsInBlock (block, start, end) {
     return this.provider.handle('pg_getTransactionsInBlock', [block, start, end])
   }
+
+  /**
+   * Returns the most recent transactions.
+   * @param {Number} start First transaction to query.
+   * @param {Number} end Last transaction to query.
+   * @return {Array} A list of transaction objects.
+   */
+  async getRecentTransactions (start, end) {
+    return this.provider.handle('pg_getRecentTransactions', [start, end])
+  }
+
+  /**
+   * Returns information about an account by address.
+   * @param {String} address An account address.
+   * @return {*} The account object.
+   */
+  async getAccount (address) {
+    return this.provider.handle('pg_getAccount', [address])
+  }
+
+  /**
+   * Returns transactions where an address is either the sender or recipient.
+   * @param {*} address An account address.
+   * @param {*} start First transaction to query.
+   * @param {*} end Last transaction to query.
+   * @return {Array} A list of transaction objects.
+   */
+  async getTransactionsByAddress (address, start, end) {
+    return this.provider.handle('pg_getTransactionsByAddress', [address, start, end])
+  }
 }
 
 module.exports = PlasmaClient
 
 },{"./providers":38}],33:[function(require,module,exports){
+const DUMMY_ACCOUNTS = [
+  {
+    address: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
+    balances: [
+      {
+        token: 'ETH',
+        amount: 350003
+      }
+    ]
+  }
+]
+
 const DUMMY_TRANSCTIONS = [
   {
-    value: false,
     hash: '0x0000000000000000000000000000000000000000000000000000000000000001',
     block: 1,
-    from: '0x0000000000000000000000000000000000000000',
-    to: '0x0000000000000000000000000000000000000000',
-    val: 0,
-    fee: 0
+    transfers: [
+      {
+        sender: '0x0000000000000000000000000000000000000000',
+        recipient: '0x0000000000000000000000000000000000000000',
+        token: 'ETH',
+        amount: 100,
+        start: 0,
+        end: 100
+      }
+    ]
   },
   {
-    value: false,
     hash: '0x0000000000000000000000000000000000000000000000000000000000000002',
     block: 1,
-    from: '0x0000000000000000000000000000000000000000',
-    to: '0x0000000000000000000000000000000000000000',
-    val: 0,
-    fee: 0
+    transfers: [
+      {
+        sender: '0x0000000000000000000000000000000000000000',
+        recipient: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
+        token: 'ETH',
+        amount: 100,
+        start: 0,
+        end: 100
+      }
+    ]
   },
   {
-    value: false,
     hash: '0x0000000000000000000000000000000000000000000000000000000000000003',
     block: 1,
-    from: '0x0000000000000000000000000000000000000000',
-    to: '0x0000000000000000000000000000000000000000',
-    val: 0,
-    fee: 0
+    transfers: [
+      {
+        sender: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
+        recipient: '0x0000000000000000000000000000000000000000',
+        token: 'ETH',
+        amount: 100,
+        start: 0,
+        end: 100
+      }
+    ]
   }
 ]
 
 const DUMMY_BLOCKS = [
   {
-    value: false,
     number: 1,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x1000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 2,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x2000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 3,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x3000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 4,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x4000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 5,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x5000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 6,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x6000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   },
   {
-    value: false,
     number: 7,
+    operator: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     hash: '0x7000000000000000000000000000000000000000000000000000000000000000',
+    size: 0,
+    timestamp: 1546990851,
     transactions: 0
   }
 ]
 
 module.exports = {
   DUMMY_TRANSCTIONS,
-  DUMMY_BLOCKS
+  DUMMY_BLOCKS,
+  DUMMY_ACCOUNTS
 }
 
 },{}],34:[function(require,module,exports){
@@ -1956,12 +2036,17 @@ class DummyProvider extends BaseProvider {
     return 'dummy'
   }
 
-  async handle (method, data) {
+  async handle (method, data = []) {
     return new Promise((resolve, reject) => {
       const methods = {
         'pg_getTransaction': this.getTransaction,
         'pg_getBlock': this.getBlock,
-        'pg_getBlocks': this.getBlocks
+        'pg_getBlocks': this.getBlocks,
+        'pg_getHeight': this.getHeight,
+        'pg_getTransactionsInBlock': this.getTransactionsInBlock,
+        'pg_getRecentTransactions': this.getRecentTransactions,
+        'pg_getAccount': this.getAccount,
+        'pg_getTransactionsByAddress': this.getTransactionsByAddress
       }
 
       try {
@@ -1989,6 +2074,36 @@ class DummyProvider extends BaseProvider {
     return dummy.DUMMY_BLOCKS.filter((block) => {
       return block.number >= start && block.number <= end
     })
+  }
+
+  getHeight () {
+    return dummy.DUMMY_BLOCKS.reduce((prev, curr) => {
+      return (prev.number > curr.number ? prev : curr)
+    }).number
+  }
+
+  getTransactionsInBlock (block, start, end) {
+    return dummy.DUMMY_TRANSCTIONS.filter((tx) => {
+      return tx.block === block
+    }).slice(start, end)
+  }
+
+  getRecentTransactions (start, end) {
+    return dummy.DUMMY_TRANSCTIONS.slice().reverse().slice(start, end + 1)
+  }
+
+  getAccount (address) {
+    return dummy.DUMMY_ACCOUNTS.find((account) => {
+      return account.address === address
+    })
+  }
+
+  getTransactionsByAddress (address, start, end) {
+    return dummy.DUMMY_TRANSCTIONS.filter((tx) => {
+      return tx.transfers.some((transfer) => {
+        return transfer.sender === address || transfer.recipient === address
+      })
+    }).slice(start, end + 1)
   }
 }
 

@@ -1,19 +1,20 @@
 # plasma-js-lib
 [![Coverage Status](https://coveralls.io/repos/github/plasma-group/plasma-js-lib/badge.svg?branch=master)](https://coveralls.io/github/plasma-group/plasma-js-lib?branch=master) [![Build Status](https://travis-ci.org/plasma-group/plasma-js-lib.svg?branch=master)](https://travis-ci.org/plasma-group/plasma-js-lib)
 
-`plasma-js-lib` is a JavaScript client library for interacting with PG Plasma nodes. `plasma-js-lib` effectively wraps the JSON-RPC interface that our plasma nodes expose and provides a nice API for app developers to work with.
+`plasma-js-lib` is a JavaScript client library for interacting with PG Plasma nodes.
+`plasma-js-lib` effectively wraps the JSON-RPC interface that our plasma nodes expose and provides a nice API for app developers to work with.
 
 ## Installation
 There are several easy ways to start using `plasma-js-lib`! 
 
-### Node.js
+### Node.js Apps
 If you're developing a `Node.js` application, you can simply install `plasma-js-lib` via `npm`:
 
 ```
 $ npm install --save plasma-js-lib
 ```
 
-### Browser
+### Browser Apps
 If you're developing a browser application, we provide a compressed and minified version of `plasma-js-lib` that you can include in a `<script>` tag.
 
 ```
@@ -27,11 +28,14 @@ If you're developing a browser application, we provide a compressed and minified
 Welcome! If you're looking to contribute to `plasma-js-lib`, you're in the right place.
 
 ### Contributing Guide and CoC
-Plasma Group follows a [Contributing Guide and Code of Conduct](https://github.com/plasma-group/plasma-js-lib/blob/master/.github/CONTRIBUTING.md) adapted slightly from the [Contributor Covenant](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). All contributors are expected to read through this guide. We're here to cultivate a welcoming and inclusive contributing environment, and every new contributor needs to do their part to uphold our community standards.
+Plasma Group follows a [Contributing Guide and Code of Conduct](https://github.com/plasma-group/plasma-js-lib/blob/master/.github/CONTRIBUTING.md) adapted slightly from the [Contributor Covenant](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html).
+All contributors are expected to read through this guide.
+We're here to cultivate a welcoming and inclusive contributing environment, and every new contributor needs to do their part to uphold our community standards.
 
 ### Requirements and Setup
 #### Node.js
-`plasma-js-lib` is tested and built with [`Node.js`](https://nodejs.org/en/). Although you **do not need [`Node.js`] to use this library in your application**, you'll need to install `Node.js` (and it's corresponding package manager, `npm`) for your system before contributing.
+`plasma-js-lib` is tested and built with [`Node.js`](https://nodejs.org/en/).
+Although you **do not need `Node.js` to use this library in your application**, you'll need to install `Node.js` (and its corresponding package manager, `npm`) for your system before **contributing**.
 
 `plasma-js-lib` has been tested on the following versions of Node:
 
