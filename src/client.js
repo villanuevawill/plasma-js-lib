@@ -1,3 +1,4 @@
+const BigNum = require('bn.js')
 const DefaultProvider = require('./providers').DefaultProvider
 
 /**
@@ -41,7 +42,11 @@ class PlasmaClient {
    * @return {*} A list of account balances.
    */
   async getBalances (address) {
-    return this.provider.handle('pg_getBalances', [address])
+    let balances = await this.provider.handle('pg_getBalances', [address])
+    for (let token in balances) {
+      balances[token] = new BigNum(balances[token], 'hex')
+    }
+    return balances
   }
 
   /**
