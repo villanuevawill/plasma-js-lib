@@ -9,6 +9,16 @@ class PlasmaClient {
   }
 
   /**
+   * Submits a deposit.
+   * @param {*} token Token to deposit.
+   * @param {*} amount Amount to deposit.
+   * @param {*} address Address to deposit to.
+   */
+  async deposit (token, amount, address) {
+    return this.provider.handle('pg_deposit', [token, amount, address])
+  }
+
+  /**
    * Sends a transaction to the client.
    * @param {*} transaction A transaction object.
    * @return {String} The transaction receipt.
@@ -78,7 +88,11 @@ class PlasmaClient {
    * @return {Array} A list of transaction objects.
    */
   async getTransactionsInBlock (block, start, end) {
-    return this.provider.handle('pg_getTransactionsInBlock', [block, start, end])
+    return this.provider.handle('pg_getTransactionsInBlock', [
+      block,
+      start,
+      end
+    ])
   }
 
   /**
@@ -108,7 +122,11 @@ class PlasmaClient {
    * @return {Array} A list of transaction objects.
    */
   async getTransactionsByAddress (address, start, end) {
-    return this.provider.handle('pg_getTransactionsByAddress', [address, start, end])
+    return this.provider.handle('pg_getTransactionsByAddress', [
+      address,
+      start,
+      end
+    ])
   }
 }
 
