@@ -20,6 +20,15 @@ class PlasmaClient {
   }
 
   /**
+   * Signs a message.
+   * @param {String} address Address to sign with.
+   * @param {String} data Message to sign.
+   */
+  async sign (address, data) {
+    return this.provider.handle('pg_sign', [address, data])
+  }
+
+  /**
    * Sends a transaction to the client.
    * @param {*} transaction A transaction object.
    * @return {String} The transaction receipt.
