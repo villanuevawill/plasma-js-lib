@@ -44,7 +44,7 @@ class PlasmaClient {
   async getBalances (address) {
     let balances = await this.provider.handle('pg_getBalances', [address])
     for (let token in balances) {
-      balances[token] = new BigNum(balances[token], 'hex')
+      balances[token] = new BigNum(balances[token].toString(), 'hex')
     }
     return balances
   }
