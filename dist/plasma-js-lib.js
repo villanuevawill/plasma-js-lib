@@ -5187,11 +5187,11 @@ class PlasmaClient {
 
   /**
    * Signs a message.
-   * @param {String} message Message to sign.
    * @param {String} address Address to sign with.
+   * @param {String} data Message to sign.
    */
-  async sign (message, address) {
-    return this.provider.handle('pg_sign', [message, address])
+  async sign (address, data) {
+    return this.provider.handle('pg_sign', [address, data])
   }
 
   /**
