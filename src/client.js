@@ -1,5 +1,12 @@
 const BigNum = require('bn.js')
+const utils = require('plasma-utils')
+const models = utils.serialization.models
+const UnsignedTransaction = models.UnsignedTransaction
 const DefaultProvider = require('./providers').DefaultProvider
+
+const toHexString = (value) => {
+  return new BigNum(value).toString('hex')
+}
 
 /**
  * Acts as a nice wrapper for available JSON-RPC providers.
@@ -16,6 +23,8 @@ class PlasmaClient {
    * @param {*} address Address to deposit to.
    */
   async deposit (token, amount, address) {
+    token = toHexString(token)
+    amount = toHexString(amount)
     return this.provider.handle('pg_deposit', [token, amount, address])
   }
 
@@ -141,6 +150,41 @@ class PlasmaClient {
       start,
       end
     ])
+  }
+
+  async getNextBlock () {
+    return this.provider.handle('pg_getNextBlock')
+  }
+
+  async pickRanges (address, token, amount) {
+    return this.provider.handle('pg_pickRanges', [
+      address,
+      token,
+      amount
+    ])
+  }
+
+  async sendTransactionAuto (from, to, token, amount) {
+    token = toHexString(token)
+    amount = toHexString(amount)
+
+    const ranges = await this.pickRanges(from, token, amount)
+    const nextBlock = await this.getNextBlock()
+    const transaction = {
+      block: nextBlock,
+      transfers: ranges.map((range) => {
+        return {
+          ...range,
+          ...{ sender: from, recipient: to }
+        }
+      })
+    }
+    const hash = new UnsignedTransaction(transaction).hash
+    const signature = await this.sign(from, hash)
+    transaction.signatures = ranges.map(() => {
+      return signature
+    })
+    return this.sendTransaction(transaction)
   }
 }
 
