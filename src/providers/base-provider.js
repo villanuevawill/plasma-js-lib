@@ -2,8 +2,8 @@
  * Base JSON-RPC provider that can be extended.
  */
 class BaseProvider {
-  constructor (options = {}) {
-    this.options = options
+  constructor (options = {}, defaultOptions = {}) {
+    this.options = Object.assign({}, defaultOptions, options)
   }
 
   get name () {

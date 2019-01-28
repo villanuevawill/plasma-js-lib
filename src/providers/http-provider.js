@@ -1,16 +1,22 @@
 const axios = require('axios')
 const uuidv4 = require('uuid/v4')
+const utils = require('plasma-utils')
 
 const BaseProvider = require('./base-provider')
+
+const defaultOptions = {
+  endpoint: 'http://localhost:9898'
+}
 
 /**
  * Provides communication with nodes that expose a JSON-RPC interface over HTTP.
  */
 class HttpProvider extends BaseProvider {
-  constructor (options = {}) {
-    super(options)
+  constructor (options) {
+    super(options, defaultOptions)
+
     this.http = axios.create({
-      baseURL: options.url || 'http://localhost:9898'
+      baseURL: this.options.endpoint
     })
   }
 
@@ -18,18 +24,49 @@ class HttpProvider extends BaseProvider {
     return 'http'
   }
 
-  async handle (method, params) {
+  async handle (method, params, convert = false) {
     const rawResponse = await this.http.post('/', {
       jsonrpc: '2.0',
       method: method,
       params: params,
       id: uuidv4()
     })
-    const response = JSON.parse(rawResponse.data)
+    const response = utils.utils.isString(rawResponse.data) ? JSON.parse(rawResponse.data) : rawResponse.data
+
     if (response.error) {
       throw response.error
     }
+    if (convert) {
+      this._convertBuffers(response.result)
+    }
     return response.result
+  }
+
+  _convertBuffers (response) {
+    if (Array.isArray(response)) {
+      response.forEach((item) => {
+        this._convertBuffers(item)
+      })
+      return
+    } else if (typeof response !== 'object' || response === null) {
+      return
+    } else if (this._isBuffer(response)) {
+      return this._convertBuffer(response)
+    }
+
+    for (let field in response) {
+      if (this._isBuffer(response[field])) {
+        response[field] = this._convertBuffer(response[field])
+      }
+    }
+  }
+
+  _convertBuffer (field) {
+    return Buffer.from(field).toString('hex')
+  }
+
+  _isBuffer (field) {
+    return field && field.type === 'Buffer'
   }
 }
 

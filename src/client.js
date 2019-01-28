@@ -1,8 +1,9 @@
 const BigNum = require('bn.js')
 const utils = require('plasma-utils')
+const BaseClient = require('./base-client')
+const OperatorClient = require('./operator')
 const models = utils.serialization.models
 const UnsignedTransaction = models.UnsignedTransaction
-const DefaultProvider = require('./providers').DefaultProvider
 
 const toHexString = (value) => {
   return new BigNum(value).toString('hex')
@@ -11,9 +12,10 @@ const toHexString = (value) => {
 /**
  * Acts as a nice wrapper for available JSON-RPC providers.
  */
-class PlasmaClient {
-  constructor (provider = new DefaultProvider()) {
-    this.provider = provider
+class PlasmaClient extends BaseClient {
+  constructor (provider) {
+    super(provider)
+    this.operator = new OperatorClient(provider)
   }
 
   /**
@@ -23,7 +25,9 @@ class PlasmaClient {
    * @param {*} address Address to deposit to.
    */
   async deposit (token, amount, address) {
-    token = toHexString(token)
+    if (!utils.utils.web3Utils.isAddress(address)) {
+      token = toHexString(token)
+    }
     amount = toHexString(amount)
     return this.provider.handle('pg_deposit', [token, amount, address])
   }
@@ -185,6 +189,18 @@ class PlasmaClient {
       return signature
     })
     return this.sendTransaction(transaction)
+  }
+
+  async listToken (tokenAddress) {
+    return this.provider.handle('pg_listToken', [
+      tokenAddress
+    ])
+  }
+
+  async getTokenId (tokenAddress) {
+    return this.provider.handle('pg_getTokenId', [
+      tokenAddress
+    ])
   }
 }
 
