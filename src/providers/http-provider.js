@@ -37,19 +37,18 @@ class HttpProvider extends BaseProvider {
       throw response.error
     }
     if (convert) {
-      this._convertBuffers(response.result)
+      response.result = this._convertBuffers(response.result)
     }
     return response.result
   }
 
   _convertBuffers (response) {
     if (Array.isArray(response)) {
-      response.forEach((item) => {
-        this._convertBuffers(item)
+      return response.map((item) => {
+        return this._convertBuffers(item)
       })
-      return
     } else if (typeof response !== 'object' || response === null) {
-      return
+      return response
     } else if (this._isBuffer(response)) {
       return this._convertBuffer(response)
     }
@@ -59,6 +58,7 @@ class HttpProvider extends BaseProvider {
         response[field] = this._convertBuffer(response[field])
       }
     }
+    return response
   }
 
   _convertBuffer (field) {
