@@ -18,7 +18,7 @@ $ npm install --save plasma-js-lib
 If you're developing a browser application, we provide a compressed and minified version of `plasma-js-lib` that you can include in a `<script>` tag.
 
 ```
-<script src="https://cdn.plasma.group/scripts/plasma-js-lib.min.js" type="text/javascript"></script>
+<script src="https://raw.githubusercontent.com/plasma-group/plasma-js-lib/master/dist/plasma-js-lib.min.js" type="text/javascript"></script>
 ```
 
 ## Documentation
