@@ -202,6 +202,24 @@ class PlasmaClient extends BaseClient {
       tokenAddress
     ])
   }
+
+  async createAccount () {
+    return this.provider.handle('pg_createAccount')
+  }
+
+  async startExit (address, token, amount) {
+    token = toHexString(token)
+    amount = toHexString(amount)
+    return this.provider.handle('pg_startExit', [address, token, amount])
+  }
+
+  async finalizeExits (address) {
+    return this.provider.handle('pg_finalizeExits', [address])
+  }
+
+  async getExits (address) {
+    return this.provider.handle('pg_getExits', [address])
+  }
 }
 
 module.exports = PlasmaClient
