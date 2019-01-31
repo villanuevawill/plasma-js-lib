@@ -34,7 +34,7 @@ class HttpProvider extends BaseProvider {
     const response = utils.utils.isString(rawResponse.data) ? JSON.parse(rawResponse.data) : rawResponse.data
 
     if (response.error) {
-      throw response.error
+      console.log(`ERROR: ${response.message}`)
     }
     if (convert) {
       response.result = this._convertBuffers(response.result)
