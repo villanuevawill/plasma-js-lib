@@ -21,7 +21,7 @@ Then you'll be able to import ``Plasma`` in your project:
 
 .. code:: javascript
    const Plasma = require('plasma-js-lib')
-   
+
 Browser
 -------
 You can also import ``plasma-js-lib`` with a ``<script>`` tag:
