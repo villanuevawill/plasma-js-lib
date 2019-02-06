@@ -49105,9 +49105,7 @@ class PlasmaClient extends BaseClient {
    * @return {string} The token's ID.
    */
   async getTokenId (tokenAddress) {
-    return this.provider.handle('pg_getTokenId', [
-      tokenAddress
-    ])
+    return this.provider.handle('pg_getTokenId', [tokenAddress])
   }
 
   /**
@@ -49148,11 +49146,7 @@ class PlasmaClient extends BaseClient {
    * @return {Array<Range>} List of ranges that cover the transaction.
    */
   async pickRanges (address, token, amount) {
-    return this.provider.handle('pg_pickRanges', [
-      address,
-      token,
-      amount
-    ])
+    return this.provider.handle('pg_pickRanges', [address, token, amount])
   }
 
   /**
@@ -49224,9 +49218,7 @@ class PlasmaClient extends BaseClient {
    * @return {*} The Ethereum transaction result.
    */
   async listToken (tokenAddress) {
-    return this.provider.handle('pg_listToken', [
-      tokenAddress
-    ])
+    return this.provider.handle('pg_listToken', [tokenAddress])
   }
 }
 
@@ -49257,7 +49249,11 @@ class OperatorClient extends BaseClient {
    * @param {number} end Last transaction to query.
    */
   async getBlockTransactions (block, start, end) {
-    return this.provider.handle('getBlockTransactions', [block, start, end], true)
+    return this.provider.handle(
+      'getBlockTransactions',
+      [block, start, end],
+      true
+    )
   }
 
   /**
@@ -49308,7 +49304,9 @@ class BaseProvider {
   }
 
   get name () {
-    throw new Error('Classes that extend BaseProvider must implement this method')
+    throw new Error(
+      'Classes that extend BaseProvider must implement this method'
+    )
   }
 
   /**
@@ -49318,7 +49316,9 @@ class BaseProvider {
    * @return {*} The JSON-RPC response or error object.
    */
   async handle (method, params) {
-    throw new Error('Classes that extend BaseProvider must implement this method')
+    throw new Error(
+      'Classes that extend BaseProvider must implement this method'
+    )
   }
 }
 
@@ -49385,7 +49385,9 @@ class HttpProvider extends BaseProvider {
       params: params,
       id: uuidv4()
     })
-    const response = utils.utils.isString(rawResponse.data) ? JSON.parse(rawResponse.data) : rawResponse.data
+    const response = utils.utils.isString(rawResponse.data)
+      ? JSON.parse(rawResponse.data)
+      : rawResponse.data
 
     if (response.error) {
       throw new Error(response.message)
