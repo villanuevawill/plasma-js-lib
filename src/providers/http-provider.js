@@ -31,7 +31,9 @@ class HttpProvider extends BaseProvider {
       params: params,
       id: uuidv4()
     })
-    const response = utils.utils.isString(rawResponse.data) ? JSON.parse(rawResponse.data) : rawResponse.data
+    const response = utils.utils.isString(rawResponse.data)
+      ? JSON.parse(rawResponse.data)
+      : rawResponse.data
 
     if (response.error) {
       throw new Error(response.message)
@@ -42,6 +44,12 @@ class HttpProvider extends BaseProvider {
     return response.result
   }
 
+  /**
+   * Converts any buffer items into hex strings.
+   * Necessary until we stop pumping buffers out of the operator.
+   * @param {*} response A response object.
+   * @return {*} Parsed response with converted buffers.
+   */
   _convertBuffers (response) {
     if (Array.isArray(response)) {
       return response.map((item) => {
@@ -61,12 +69,22 @@ class HttpProvider extends BaseProvider {
     return response
   }
 
-  _convertBuffer (field) {
-    return Buffer.from(field).toString('hex')
+  /**
+   * Converts a buffer to a hex string.
+   * @param {Buffer} value A buffer.
+   * @return {string} Buffer as a hex string.
+   */
+  _convertBuffer (value) {
+    return Buffer.from(value).toString('hex')
   }
 
-  _isBuffer (field) {
-    return field && field.type === 'Buffer'
+  /**
+   * Checks if value is a buffer.
+   * @param {*} value Value to check.
+   * @return {boolean} `true` if the value is a buffer, `false` otherwise.
+   */
+  _isBuffer (value) {
+    return value && value.type === 'Buffer'
   }
 }
 

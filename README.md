@@ -1,8 +1,8 @@
 # plasma-js-lib
 [![Coverage Status](https://coveralls.io/repos/github/plasma-group/plasma-js-lib/badge.svg?branch=master)](https://coveralls.io/github/plasma-group/plasma-js-lib?branch=master) [![Build Status](https://travis-ci.org/plasma-group/plasma-js-lib.svg?branch=master)](https://travis-ci.org/plasma-group/plasma-js-lib)
 
-`plasma-js-lib` is a JavaScript client library for interacting with PG Plasma nodes.
-`plasma-js-lib` effectively wraps the JSON-RPC interface that our plasma nodes expose and provides a nice API for app developers to work with.
+`plasma-js-lib` is a JavaScript client library for interacting with PG Plasma clients.
+`plasma-js-lib` effectively wraps the JSON-RPC interface that our plasma clients expose and provides a nice API for app developers to work with.
 
 ## Installation
 There are several easy ways to start using `plasma-js-lib`! 
@@ -33,15 +33,44 @@ All contributors are expected to read through this guide.
 We're here to cultivate a welcoming and inclusive contributing environment, and every new contributor needs to do their part to uphold our community standards.
 
 ### Requirements and Setup
+#### Cloning the Repo
+Before you start working on `plasma-js-lib`, you'll need to clone our GitHub repository:
+
+```
+git clone git@github.com:plasma-group/plasma-js-lib.git
+```
+
+Now, enter the repository.
+
+```
+cd plasma-js-lib
+```
+
 #### Node.js
 `plasma-js-lib` is tested and built with [`Node.js`](https://nodejs.org/en/).
 Although you **do not need `Node.js` to use this library in your application**, you'll need to install `Node.js` (and its corresponding package manager, `npm`) for your system before **contributing**.
 
-`plasma-js-lib` has been tested on the following versions of Node:
+We've provided a [detailed explanation of now to install `Node.js`](https://plasma-core.readthedocs.io/en/latest/reference.html#installing-node-js) on Windows, Mac, and Linux.
 
-- 10.14.2
+`plasma-core` has been tested on the following versions of Node:
 
-If you're having trouble getting a component of `plasma-js-lib` running, please make sure you have one of the above `Node.js` versions installed.
+- v8
+- v9
+- v10
+
+If you're having trouble getting a component of `plasma-core` running, please try installing one of the above versions of `Node.js` and try again.
+It's pretty easy to switch `Node.js` versions using `n`.
+First, install `n` globally.
+
+```
+npm install -g n
+```
+
+Next, install your desired verson of `Node.js`, say `v10`:
+
+```
+n 10
+```
 
 #### Packages
 `plasma-js-lib` makes use of several `npm` packages.
