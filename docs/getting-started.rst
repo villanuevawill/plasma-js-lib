@@ -20,7 +20,7 @@ If you're working with a project that supports npm_ imports, you can install ``p
 Then you'll be able to import ``Plasma`` in your project:
 
 .. code:: javascript
-   const Plasma = require('plasma-js-lib')
+   const PlasmaClient = require('plasma-js-lib')
 
 Browser
 -------
@@ -32,6 +32,6 @@ You can also import ``plasma-js-lib`` with a ``<script>`` tag:
 This will give you access to a window variable:
 
 .. code:: javascript
-   const Plasma = window.Plasma
+   const PlasmaClient = window.PlasmaClient
 
 .. _npm: https://www.npmjs.com/

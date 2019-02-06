@@ -49033,15 +49033,6 @@ class PlasmaClient extends BaseClient {
   }
 
   /**
-   * Returns information about an account by address.
-   * @param {String} address An account address.
-   * @return {*} The account object.
-   */
-  async getAccount (address) {
-    return this.provider.handle('pg_getAccount', [address])
-  }
-
-  /**
    * Returns the balances of an account.
    * @param {string} address Address of the account to query.
    * @return {*} A list of account balances.
@@ -49075,7 +49066,7 @@ class PlasmaClient extends BaseClient {
   /**
    * Returns information about a specific block.
    * @param {Number} block Number of the block to query.
-   * @return {*} The block object.
+   * @return {string} Hash of the block.
    */
   async getBlock (block) {
     return this.provider.handle('pg_getBlock', [block])
@@ -49117,6 +49108,7 @@ class PlasmaClient extends BaseClient {
    * Signs a message.
    * @param {string} address Address to sign with.
    * @param {string} data Message to sign.
+   * @return {*} The signed message.
    */
   async sign (address, data) {
     return this.provider.handle('pg_sign', [address, data])

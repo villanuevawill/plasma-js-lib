@@ -15,5 +15,5 @@ Hello and welcome to the documentation of Plasma Group's ``plasma-js-lib``!
    :maxdepth: 2
    :caption: API Reference
 
-   api/plasma
+   api/plasma-client
    api/plasma-operator
