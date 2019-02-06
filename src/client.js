@@ -1,10 +1,14 @@
 const BigNum = require('bn.js')
 const utils = require('plasma-utils')
 const BaseClient = require('./base-client')
-const OperatorClient = require('./operator')
 const models = utils.serialization.models
 const UnsignedTransaction = models.UnsignedTransaction
 
+/**
+ * Converts a value to a hex string.
+ * @param {*} value Value to convert.
+ * @return {string} Value as a hex string.
+ */
 const toHexString = (value) => {
   return new BigNum(value).toString('hex')
 }
@@ -13,54 +17,26 @@ const toHexString = (value) => {
  * Acts as a nice wrapper for available JSON-RPC providers.
  */
 class PlasmaClient extends BaseClient {
-  constructor (provider) {
-    super(provider)
-    this.operator = new OperatorClient(provider)
-  }
-
-  /**
-   * Submits a deposit.
-   * @param {*} token Token to deposit.
-   * @param {*} amount Amount to deposit.
-   * @param {*} address Address to deposit to.
-   */
-  async deposit (token, amount, address) {
-    if (!utils.utils.web3Utils.isAddress(address)) {
-      token = toHexString(token)
-    }
-    amount = toHexString(amount)
-    return this.provider.handle('pg_deposit', [token, amount, address])
-  }
-
-  /**
-   * Signs a message.
-   * @param {String} address Address to sign with.
-   * @param {String} data Message to sign.
-   */
-  async sign (address, data) {
-    return this.provider.handle('pg_sign', [address, data])
-  }
-
-  /**
-   * Sends a transaction to the client.
-   * @param {*} transaction A transaction object.
-   * @return {String} The transaction receipt.
-   */
-  async sendTransaction (transaction) {
-    return this.provider.handle('pg_sendTransaction', [transaction])
-  }
-
   /**
    * Returns all available accounts.
-   * @return {Array<String>} A list of available account addresses.
+   * @return {Array<string>} A list of available account addresses.
    */
   async getAccounts () {
     return this.provider.handle('pg_getAccounts')
   }
 
   /**
+   * Returns information about an account by address.
+   * @param {String} address An account address.
+   * @return {*} The account object.
+   */
+  async getAccount (address) {
+    return this.provider.handle('pg_getAccount', [address])
+  }
+
+  /**
    * Returns the balances of an account.
-   * @param {String} address Address of the account to query.
+   * @param {string} address Address of the account to query.
    * @return {*} A list of account balances.
    */
   async getBalances (address) {
@@ -69,6 +45,15 @@ class PlasmaClient extends BaseClient {
       balances[token] = new BigNum(balances[token].toString(), 'hex')
     }
     return balances
+  }
+
+  /**
+   * Returns a list of all exits for a user.
+   * @param {address} address Address to return exits for.
+   * @return {Array<Exit>} A list of exits.
+   */
+  async getExits (address) {
+    return this.provider.handle('pg_getExits', [address])
   }
 
   /**
@@ -90,16 +75,6 @@ class PlasmaClient extends BaseClient {
   }
 
   /**
-   * Returns information about a series of blocks.
-   * @param {*} start First block to query.
-   * @param {*} end Last block to query.
-   * @return {Array} The list of block objects.
-   */
-  async getBlocks (start, end) {
-    return this.provider.handle('pg_getBlocks', [start, end])
-  }
-
-  /**
    * Returns the current block height.
    * @return {Number} Block height.
    */
@@ -108,67 +83,81 @@ class PlasmaClient extends BaseClient {
   }
 
   /**
-   * Returns some transactions in a specific block.
-   * @param {Number} block Number of the block to query.
-   * @param {Number} start First transaction to return.
-   * @param {Number} end Last transaction to return.
-   * @return {Array} A list of transaction objects.
+   * Returns the next plasma block number.
+   * @return {BigNum} The next block number.
    */
-  async getTransactionsInBlock (block, start, end) {
-    return this.provider.handle('pg_getTransactionsInBlock', [
-      block,
-      start,
-      end
-    ])
-  }
-
-  /**
-   * Returns the most recent transactions.
-   * @param {Number} start First transaction to query.
-   * @param {Number} end Last transaction to query.
-   * @return {Array} A list of transaction objects.
-   */
-  async getRecentTransactions (start, end) {
-    return this.provider.handle('pg_getRecentTransactions', [start, end])
-  }
-
-  /**
-   * Returns information about an account by address.
-   * @param {String} address An account address.
-   * @return {*} The account object.
-   */
-  async getAccount (address) {
-    return this.provider.handle('pg_getAccount', [address])
-  }
-
-  /**
-   * Returns transactions where an address is either the sender or recipient.
-   * @param {*} address An account address.
-   * @param {*} start First transaction to query.
-   * @param {*} end Last transaction to query.
-   * @return {Array} A list of transaction objects.
-   */
-  async getTransactionsByAddress (address, start, end) {
-    return this.provider.handle('pg_getTransactionsByAddress', [
-      address,
-      start,
-      end
-    ])
-  }
-
   async getNextBlock () {
     return this.provider.handle('pg_getNextBlock')
   }
 
-  async pickRanges (address, token, amount) {
-    return this.provider.handle('pg_pickRanges', [
-      address,
-      token,
-      amount
-    ])
+  /**
+   * Gets the token ID for a given token contract.
+   * @param {string} tokenAddress Address of the token's contract.
+   * @return {string} The token's ID.
+   */
+  async getTokenId (tokenAddress) {
+    return this.provider.handle('pg_getTokenId', [tokenAddress])
   }
 
-  async sendTransactionAuto (from, to, token, amount) {
+  /**
+   * Creates a new account.
+   */
+  async createAccount () {
+    return this.provider.handle('pg_createAccount')
+  }
+
+  /**
+   * Signs a message.
+   * @param {string} address Address to sign with.
+   * @param {string} data Message to sign.
+   */
+  async sign (address, data) {
+    return this.provider.handle('pg_sign', [address, data])
+  }
+
+  /**
+   * Submits a deposit.
+   * @param {*} token Token to deposit.
+   * @param {*} amount Amount to deposit.
+   * @param {*} address Address to deposit to.
+   */
+  async deposit (token, amount, address) {
+    if (!utils.utils.web3Utils.isAddress(address)) {
+      token = toHexString(token)
+    }
+    amount = toHexString(amount)
+    return this.provider.handle('pg_deposit', [token, amount, address])
+  }
+
+  /**
+   * Picks the best ranges for a given transaction.
+   * @param {string} address Address to transact from.
+   * @param {*} token Token being sent.
+   * @param {*} amount Amount being sent.
+   * @return {Array<Range>} List of ranges that cover the transaction.
+   */
+  async pickRanges (address, token, amount) {
+    return this.provider.handle('pg_pickRanges', [address, token, amount])
+  }
+
+  /**
+   * Sends a raw signed transaction to the client.
+   * @param {SignedTransaction} transaction A transaction object.
+   * @return {string} The transaction receipt.
+   */
+  async sendRawTransaction (transaction) {
+    return this.provider.handle('pg_sendTransaction', [transaction])
+  }
+
+  /**
+   * Sends a transaction and picks ranges automatically.
+   * @param {string} from Address to send from.
+   * @param {string} to Address to send to.
+   * @param {*} token Token to send.
+   * @param {*} amount Amount to send.
+   * @return {string} The transaction receipt.
+   */
+  async sendTransaction (from, to, token, amount) {
     token = toHexString(token)
     amount = toHexString(amount)
 
@@ -188,37 +177,39 @@ class PlasmaClient extends BaseClient {
     transaction.signatures = ranges.map(() => {
       return signature
     })
-    return this.sendTransaction(transaction)
+    return this.sendRawTransaction(transaction)
   }
 
-  async listToken (tokenAddress) {
-    return this.provider.handle('pg_listToken', [
-      tokenAddress
-    ])
-  }
-
-  async getTokenId (tokenAddress) {
-    return this.provider.handle('pg_getTokenId', [
-      tokenAddress
-    ])
-  }
-
-  async createAccount () {
-    return this.provider.handle('pg_createAccount')
-  }
-
+  /**
+   * Starts an exit for a user.
+   * May start more than one exit if user's ranges are broken up.
+   * @param {string} address Address to withdraw from.
+   * @param {*} token Token to withdraw.
+   * @param {*} amount Amount to withdraw.
+   * @return {Array<string>} Hashes of the Ethereum exit transactions.
+   */
   async startExit (address, token, amount) {
     token = toHexString(token)
     amount = toHexString(amount)
     return this.provider.handle('pg_startExit', [address, token, amount])
   }
 
+  /**
+   * Finalizes all possible exits for a user.
+   * @param {string} address Address to finalize exits for.
+   * @return {Array<string>} Hashes of the Ethereum finalization transactions.
+   */
   async finalizeExits (address) {
     return this.provider.handle('pg_finalizeExits', [address])
   }
 
-  async getExits (address) {
-    return this.provider.handle('pg_getExits', [address])
+  /**
+   * Lists a token so it can be deposited.
+   * @param {string} tokenAddress Address of the token's contract.
+   * @return {*} The Ethereum transaction result.
+   */
+  async listToken (tokenAddress) {
+    return this.provider.handle('pg_listToken', [tokenAddress])
   }
 }
 
