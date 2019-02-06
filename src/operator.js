@@ -30,13 +30,6 @@ class OperatorClient extends BaseClient {
   }
 
   /**
-   * Submits a block to the root chain.
-   */
-  async submitBlock () {
-    return this.provider.handle('pg_submitBlock')
-  }
-
-  /**
    * Returns a transaction by hash.
    * @param {string} hash The transaction hash.
    * @return {SignedTransaction} The signed transaction.
@@ -62,6 +55,13 @@ class OperatorClient extends BaseClient {
    */
   async getCurrentBlock () {
     return this.provider.handle('getBlockNumber', [], true)
+  }
+
+  /**
+   * Submits the current block to the root chain.
+   */
+  async submitBlock () {
+    return this.provider.handle('pg_submitBlock')
   }
 }
 
