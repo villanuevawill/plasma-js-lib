@@ -3,12 +3,10 @@ const PlasmaClient = require('./src/client')
 const PlasmaOperator = require('./src/operator')
 const providers = require('./src/providers/index')
 
+PlasmaClient.PlasmaOperator = PlasmaOperator
 PlasmaClient.providers = providers
 
-module.exports = {
-  PlasmaClient,
-  PlasmaOperator
-}
+module.exports = PlasmaClient
 
 },{"./src/client":466,"./src/operator":467,"./src/providers/index":471}],2:[function(require,module,exports){
 function _arrayWithoutHoles(arr) {
@@ -43591,7 +43589,7 @@ exports.createContext = Script.createContext = function (context) {
 
 })));
 
-},{"@babel/runtime/helpers/typeof":16,"lodash/isArray":307,"lodash/isNumber":315,"lodash/isObject":316,"lodash/isString":319,"web3-eth-iban":452,"web3-utils":457}],447:[function(require,module,exports){
+},{"@babel/runtime/helpers/typeof":16,"lodash/isArray":307,"lodash/isNumber":315,"lodash/isObject":316,"lodash/isString":319,"web3-eth-iban":452,"web3-utils":454}],447:[function(require,module,exports){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('web3-providers'), require('eventemitter3'), require('@babel/runtime/regenerator'), require('@babel/runtime/helpers/asyncToGenerator'), require('@babel/runtime/helpers/toConsumableArray'), require('lodash/isString'), require('lodash/cloneDeep'), require('web3-core-promievent'), require('web3-core-subscriptions'), require('web3-core-helpers'), require('web3-utils'), require('lodash/isObject'), require('@babel/runtime/helpers/get'), require('lodash/isFunction'), require('@babel/runtime/helpers/createClass'), require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/possibleConstructorReturn'), require('@babel/runtime/helpers/getPrototypeOf'), require('@babel/runtime/helpers/inherits')) :
     typeof define === 'function' && define.amd ? define(['exports', 'web3-providers', 'eventemitter3', '@babel/runtime/regenerator', '@babel/runtime/helpers/asyncToGenerator', '@babel/runtime/helpers/toConsumableArray', 'lodash/isString', 'lodash/cloneDeep', 'web3-core-promievent', 'web3-core-subscriptions', 'web3-core-helpers', 'web3-utils', 'lodash/isObject', '@babel/runtime/helpers/get', 'lodash/isFunction', '@babel/runtime/helpers/createClass', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/possibleConstructorReturn', '@babel/runtime/helpers/getPrototypeOf', '@babel/runtime/helpers/inherits'], factory) :
@@ -45304,7 +45302,7 @@ exports.createContext = Script.createContext = function (context) {
 
 })));
 
-},{"@babel/runtime/helpers/asyncToGenerator":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/get":7,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"@babel/runtime/helpers/toConsumableArray":15,"@babel/runtime/regenerator":17,"eventemitter3":137,"lodash/cloneDeep":298,"lodash/isFunction":311,"lodash/isObject":316,"lodash/isString":319,"web3-core-helpers":446,"web3-core-promievent":448,"web3-core-subscriptions":449,"web3-providers":453,"web3-utils":457}],448:[function(require,module,exports){
+},{"@babel/runtime/helpers/asyncToGenerator":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/get":7,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"@babel/runtime/helpers/toConsumableArray":15,"@babel/runtime/regenerator":17,"eventemitter3":137,"lodash/cloneDeep":298,"lodash/isFunction":311,"lodash/isObject":316,"lodash/isString":319,"web3-core-helpers":446,"web3-core-promievent":448,"web3-core-subscriptions":449,"web3-providers":453,"web3-utils":454}],448:[function(require,module,exports){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('eventemitter3')) :
     typeof define === 'function' && define.amd ? define(['exports', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/createClass', 'eventemitter3'], factory) :
@@ -45613,7 +45611,7 @@ exports.createContext = Script.createContext = function (context) {
 
 })));
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/get":7,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"eventemitter3":137,"lodash/cloneDeep":298,"lodash/isFunction":311,"web3-core-helpers":446,"web3-utils":457}],450:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/get":7,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"eventemitter3":137,"lodash/cloneDeep":298,"lodash/isFunction":311,"web3-core-helpers":446,"web3-utils":454}],450:[function(require,module,exports){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('lodash/isObject'), require('web3-providers'), require('web3-utils')) :
     typeof define === 'function' && define.amd ? define(['exports', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/createClass', 'lodash/isObject', 'web3-providers', 'web3-utils'], factory) :
@@ -45780,7 +45778,7 @@ exports.createContext = Script.createContext = function (context) {
 
 })));
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"lodash/isObject":316,"web3-providers":453,"web3-utils":457}],451:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"lodash/isObject":316,"web3-providers":453,"web3-utils":454}],451:[function(require,module,exports){
 (function (global,Buffer){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('web3-providers'), require('web3-utils'), require('web3-core-helpers'), require('web3-core-method'), require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('@babel/runtime/helpers/possibleConstructorReturn'), require('@babel/runtime/helpers/getPrototypeOf'), require('@babel/runtime/helpers/inherits'), require('@babel/runtime/helpers/assertThisInitialized'), require('lodash/isUndefined'), require('lodash/isNull'), require('lodash/isObject'), require('lodash/isBoolean'), require('lodash/isString'), require('lodash/has'), require('lodash/extend'), require('eth-lib/lib/account'), require('eth-lib/lib/hash'), require('eth-lib/lib/rlp'), require('eth-lib/lib/nat'), require('eth-lib/lib/bytes'), require('scrypt.js'), require('uuid'), require('web3-core')) :
@@ -46271,7 +46269,7 @@ exports.createContext = Script.createContext = function (context) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-},{"@babel/runtime/helpers/assertThisInitialized":3,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"buffer":90,"crypto":100,"crypto-browserify":100,"eth-lib/lib/account":129,"eth-lib/lib/bytes":131,"eth-lib/lib/hash":132,"eth-lib/lib/nat":133,"eth-lib/lib/rlp":134,"lodash/extend":301,"lodash/has":303,"lodash/isBoolean":309,"lodash/isNull":314,"lodash/isObject":316,"lodash/isString":319,"lodash/isUndefined":322,"scrypt.js":416,"uuid":440,"web3-core":450,"web3-core-helpers":446,"web3-core-method":447,"web3-providers":453,"web3-utils":457}],452:[function(require,module,exports){
+},{"@babel/runtime/helpers/assertThisInitialized":3,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"buffer":90,"crypto":100,"crypto-browserify":100,"eth-lib/lib/account":129,"eth-lib/lib/bytes":131,"eth-lib/lib/hash":132,"eth-lib/lib/nat":133,"eth-lib/lib/rlp":134,"lodash/extend":301,"lodash/has":303,"lodash/isBoolean":309,"lodash/isNull":314,"lodash/isObject":316,"lodash/isString":319,"lodash/isUndefined":322,"scrypt.js":416,"uuid":440,"web3-core":450,"web3-core-helpers":446,"web3-core-method":447,"web3-providers":453,"web3-utils":454}],452:[function(require,module,exports){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('web3-utils'), require('bn.js')) :
     typeof define === 'function' && define.amd ? define(['exports', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/createClass', 'web3-utils', 'bn.js'], factory) :
@@ -46418,7 +46416,7 @@ exports.createContext = Script.createContext = function (context) {
 
 })));
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"bn.js":58,"web3-utils":457}],453:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"bn.js":58,"web3-utils":454}],453:[function(require,module,exports){
 (function (process,Buffer){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('websocket'), require('xhr2-cookies'), require('url-parse'), require('lodash/isFunction'), require('http'), require('https'), require('@babel/runtime/regenerator'), require('@babel/runtime/helpers/asyncToGenerator'), require('eventemitter3'), require('oboe'), require('@babel/runtime/helpers/typeof'), require('lodash/isArray'), require('lodash/isObject'), require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('@babel/runtime/helpers/possibleConstructorReturn'), require('@babel/runtime/helpers/getPrototypeOf'), require('@babel/runtime/helpers/get'), require('@babel/runtime/helpers/inherits')) :
@@ -47645,149 +47643,7 @@ exports.createContext = Script.createContext = function (context) {
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-},{"@babel/runtime/helpers/asyncToGenerator":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/get":7,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"@babel/runtime/helpers/typeof":16,"@babel/runtime/regenerator":17,"_process":381,"buffer":90,"eventemitter3":137,"http":427,"https":154,"lodash/isArray":307,"lodash/isFunction":311,"lodash/isObject":316,"oboe":338,"url-parse":435,"websocket":454,"xhr2-cookies":459}],454:[function(require,module,exports){
-var _global = (function() { return this || {}; })();
-var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
-var websocket_version = require('./version');
-
-
-/**
- * Expose a W3C WebSocket class with just one or two arguments.
- */
-function W3CWebSocket(uri, protocols) {
-	var native_instance;
-
-	if (protocols) {
-		native_instance = new NativeWebSocket(uri, protocols);
-	}
-	else {
-		native_instance = new NativeWebSocket(uri);
-	}
-
-	/**
-	 * 'native_instance' is an instance of nativeWebSocket (the browser's WebSocket
-	 * class). Since it is an Object it will be returned as it is when creating an
-	 * instance of W3CWebSocket via 'new W3CWebSocket()'.
-	 *
-	 * ECMAScript 5: http://bclary.com/2004/11/07/#a-13.2.2
-	 */
-	return native_instance;
-}
-if (NativeWebSocket) {
-	['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'].forEach(function(prop) {
-		Object.defineProperty(W3CWebSocket, prop, {
-			get: function() { return NativeWebSocket[prop]; }
-		});
-	});
-}
-
-/**
- * Module exports.
- */
-module.exports = {
-    'w3cwebsocket' : NativeWebSocket ? W3CWebSocket : null,
-    'version'      : websocket_version
-};
-
-},{"./version":455}],455:[function(require,module,exports){
-module.exports = require('../package.json').version;
-
-},{"../package.json":456}],456:[function(require,module,exports){
-module.exports={
-  "_from": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_id": "websocket@1.0.26",
-  "_inBundle": false,
-  "_integrity": "",
-  "_location": "/web3-providers/websocket",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "git",
-    "raw": "websocket@git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-    "name": "websocket",
-    "escapedName": "websocket",
-    "rawSpec": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-    "saveSpec": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-    "fetchSpec": "git://github.com/frozeman/WebSocket-Node.git",
-    "gitCommittish": "6c72925e3f8aaaea8dc8450f97627e85263999f2"
-  },
-  "_requiredBy": [
-    "/web3-providers"
-  ],
-  "_resolved": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_spec": "websocket@git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_where": "/home/k/Projects/pg/plasma/plasma-js-lib/node_modules/web3-providers",
-  "author": {
-    "name": "Brian McKelvey",
-    "email": "brian@worlize.com",
-    "url": "https://www.worlize.com/"
-  },
-  "browser": "lib/browser.js",
-  "bugs": {
-    "url": "https://github.com/theturtle32/WebSocket-Node/issues"
-  },
-  "bundleDependencies": false,
-  "config": {
-    "verbose": false
-  },
-  "contributors": [
-    {
-      "name": "Iñaki Baz Castillo",
-      "email": "ibc@aliax.net",
-      "url": "http://dev.sipdoc.net"
-    }
-  ],
-  "dependencies": {
-    "debug": "^2.2.0",
-    "nan": "^2.3.3",
-    "typedarray-to-buffer": "^3.1.2",
-    "yaeti": "^0.0.6"
-  },
-  "deprecated": false,
-  "description": "Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.",
-  "devDependencies": {
-    "buffer-equal": "^1.0.0",
-    "faucet": "^0.0.1",
-    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
-    "gulp-jshint": "^2.0.4",
-    "jshint": "^2.0.0",
-    "jshint-stylish": "^2.2.1",
-    "tape": "^4.0.1"
-  },
-  "directories": {
-    "lib": "./lib"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "homepage": "https://github.com/theturtle32/WebSocket-Node",
-  "keywords": [
-    "websocket",
-    "websockets",
-    "socket",
-    "networking",
-    "comet",
-    "push",
-    "RFC-6455",
-    "realtime",
-    "server",
-    "client"
-  ],
-  "license": "Apache-2.0",
-  "main": "index",
-  "name": "websocket",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theturtle32/WebSocket-Node.git"
-  },
-  "scripts": {
-    "gulp": "gulp",
-    "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
-    "test": "faucet test/unit"
-  },
-  "version": "1.0.26"
-}
-
-},{}],457:[function(require,module,exports){
+},{"@babel/runtime/helpers/asyncToGenerator":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/get":7,"@babel/runtime/helpers/getPrototypeOf":8,"@babel/runtime/helpers/inherits":9,"@babel/runtime/helpers/possibleConstructorReturn":12,"@babel/runtime/helpers/typeof":16,"@babel/runtime/regenerator":17,"_process":381,"buffer":90,"eventemitter3":137,"http":427,"https":154,"lodash/isArray":307,"lodash/isFunction":311,"lodash/isObject":316,"oboe":338,"url-parse":435,"websocket":455,"xhr2-cookies":459}],454:[function(require,module,exports){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash/isBoolean'), require('lodash/isString'), require('lodash/isNumber'), require('lodash/isNull'), require('number-to-bn'), require('utf8'), require('eth-lib/lib/hash'), require('ethjs-unit'), require('@babel/runtime/helpers/typeof'), require('lodash/isArray'), require('lodash/isObject'), require('lodash/map'), require('bn.js'), require('randomhex')) :
     typeof define === 'function' && define.amd ? define(['exports', 'lodash/isBoolean', 'lodash/isString', 'lodash/isNumber', 'lodash/isNull', 'number-to-bn', 'utf8', 'eth-lib/lib/hash', 'ethjs-unit', '@babel/runtime/helpers/typeof', 'lodash/isArray', 'lodash/isObject', 'lodash/map', 'bn.js', 'randomhex'], factory) :
@@ -48324,7 +48180,149 @@ module.exports={
 
 })));
 
-},{"@babel/runtime/helpers/typeof":16,"bn.js":58,"eth-lib/lib/hash":132,"ethjs-unit":135,"lodash/isArray":307,"lodash/isBoolean":309,"lodash/isNull":314,"lodash/isNumber":315,"lodash/isObject":316,"lodash/isString":319,"lodash/map":325,"number-to-bn":337,"randomhex":396,"utf8":438}],458:[function(require,module,exports){
+},{"@babel/runtime/helpers/typeof":16,"bn.js":58,"eth-lib/lib/hash":132,"ethjs-unit":135,"lodash/isArray":307,"lodash/isBoolean":309,"lodash/isNull":314,"lodash/isNumber":315,"lodash/isObject":316,"lodash/isString":319,"lodash/map":325,"number-to-bn":337,"randomhex":396,"utf8":438}],455:[function(require,module,exports){
+var _global = (function() { return this || {}; })();
+var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
+var websocket_version = require('./version');
+
+
+/**
+ * Expose a W3C WebSocket class with just one or two arguments.
+ */
+function W3CWebSocket(uri, protocols) {
+	var native_instance;
+
+	if (protocols) {
+		native_instance = new NativeWebSocket(uri, protocols);
+	}
+	else {
+		native_instance = new NativeWebSocket(uri);
+	}
+
+	/**
+	 * 'native_instance' is an instance of nativeWebSocket (the browser's WebSocket
+	 * class). Since it is an Object it will be returned as it is when creating an
+	 * instance of W3CWebSocket via 'new W3CWebSocket()'.
+	 *
+	 * ECMAScript 5: http://bclary.com/2004/11/07/#a-13.2.2
+	 */
+	return native_instance;
+}
+if (NativeWebSocket) {
+	['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'].forEach(function(prop) {
+		Object.defineProperty(W3CWebSocket, prop, {
+			get: function() { return NativeWebSocket[prop]; }
+		});
+	});
+}
+
+/**
+ * Module exports.
+ */
+module.exports = {
+    'w3cwebsocket' : NativeWebSocket ? W3CWebSocket : null,
+    'version'      : websocket_version
+};
+
+},{"./version":456}],456:[function(require,module,exports){
+module.exports = require('../package.json').version;
+
+},{"../package.json":457}],457:[function(require,module,exports){
+module.exports={
+  "_from": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+  "_id": "websocket@1.0.26",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/plasma-client/plasma-js-lib/websocket",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "name": "websocket",
+    "escapedName": "websocket",
+    "rawSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "saveSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "fetchSpec": "git://github.com/frozeman/WebSocket-Node.git",
+    "gitCommittish": "browserifyCompatible"
+  },
+  "_requiredBy": [
+    "/plasma-client/plasma-js-lib/web3-providers"
+  ],
+  "_resolved": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
+  "_spec": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+  "_where": "/home/k/Projects/pg/plasma/plasma-js-lib/node_modules/web3-providers",
+  "author": {
+    "name": "Brian McKelvey",
+    "email": "brian@worlize.com",
+    "url": "https://www.worlize.com/"
+  },
+  "browser": "lib/browser.js",
+  "bugs": {
+    "url": "https://github.com/theturtle32/WebSocket-Node/issues"
+  },
+  "bundleDependencies": false,
+  "config": {
+    "verbose": false
+  },
+  "contributors": [
+    {
+      "name": "Iñaki Baz Castillo",
+      "email": "ibc@aliax.net",
+      "url": "http://dev.sipdoc.net"
+    }
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "nan": "^2.3.3",
+    "typedarray-to-buffer": "^3.1.2",
+    "yaeti": "^0.0.6"
+  },
+  "deprecated": false,
+  "description": "Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.",
+  "devDependencies": {
+    "buffer-equal": "^1.0.0",
+    "faucet": "^0.0.1",
+    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulp-jshint": "^2.0.4",
+    "jshint": "^2.0.0",
+    "jshint-stylish": "^2.2.1",
+    "tape": "^4.0.1"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage": "https://github.com/theturtle32/WebSocket-Node",
+  "keywords": [
+    "websocket",
+    "websockets",
+    "socket",
+    "networking",
+    "comet",
+    "push",
+    "RFC-6455",
+    "realtime",
+    "server",
+    "client"
+  ],
+  "license": "Apache-2.0",
+  "main": "index",
+  "name": "websocket",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theturtle32/WebSocket-Node.git"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
+    "test": "faucet test/unit"
+  },
+  "version": "1.0.26"
+}
+
+},{}],458:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
