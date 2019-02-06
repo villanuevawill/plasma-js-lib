@@ -52,13 +52,13 @@ Although you **do not need `Node.js` to use this library in your application**, 
 
 We've provided a [detailed explanation of now to install `Node.js`](https://plasma-core.readthedocs.io/en/latest/reference.html#installing-node-js) on Windows, Mac, and Linux.
 
-`plasma-core` has been tested on the following versions of Node:
+`plasma-js-lib` has been tested on the following versions of Node:
 
 - v8
 - v9
 - v10
 
-If you're having trouble getting a component of `plasma-core` running, please try installing one of the above versions of `Node.js` and try again.
+If you're having trouble getting a component of `plasma-js-lib` running, please try installing one of the above versions of `Node.js` and try again.
 It's pretty easy to switch `Node.js` versions using `n`.
 First, install `n` globally.
 
