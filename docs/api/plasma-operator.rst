@@ -35,6 +35,27 @@ Returns
 
 ``Promise<Array>``: A list of metadata objects for each block.
 
+-------
+Example
+-------
+
+.. code-block:: javascript
+
+    const blocks = await operator.getBlockMetadata(0, 3)
+    console.log(blocks)
+    > [ { blockNumber: '00000001',
+          rootHash: '0000000000000000000000000000000000000000000000000000000000000000',
+          timestamp: '0168c59834e8',
+          numTxs: '00' },
+        { blockNumber: '00000002',
+          rootHash: '0000000000000000000000000000000000000000000000000000000000000000',
+          timestamp: '0168c5983bbe',
+          numTxs: '00' },
+        { blockNumber: '00000003',
+          rootHash: '0000000000000000000000000000000000000000000000000000000000000000',
+          timestamp: '0168c5983fcf',
+          numTxs: '00' } ]
+
 ------------------------------------------------------------------------------
 
 getBlockTransactions
@@ -85,6 +106,32 @@ Returns
 
 ``Promise<SignedTransaction>``: The transaction object.
 
+-------
+Example
+-------
+
+.. code-block:: javascript
+
+    const transaction = await operator.getTransaction('0x7b6ced8ecd267f504f86b6cace13f078f936a20adc98b37fc83e1030f976e8e5')
+    console.log(transaction)
+    > SignedTransaction {
+        schema:
+          Schema {
+            unparsedFields:
+              { block: [Object], transfers: [Object], signatures: [Object] },
+                fields:
+                { block: [SchemaNumber],
+                  transfers: [Schema],
+                  signatures: [Schema] } },
+        block: <BN: 2>,
+        transfers:
+          [ { sender: '0x82A978B3f5962A5b0957d9ee9eEf472EE55B42F1',
+              recipient: '0x7d577a597B2742b498Cb5Cf0C26cDCD726d39E6e',
+              token: <BN: 0>,
+              start: <BN: 0>,
+              end: <BN: a> } ],
+        signatures: [] }
+
 ------------------------------------------------------------------------------
 
 getRecentTransactions
@@ -109,6 +156,30 @@ Returns
 
 ``Promise<Array>``: A list of transaction objects.
 
+-------
+Example
+-------
+
+.. code-block:: javascript
+
+    const transactions = await operator.getRecentTransactions(0, 10)
+    console.log(transactions)
+    > [ SignedTransaction {
+          schema: Schema { unparsedFields: [Object], fields: [Object] },
+          block: <BN: 5>,
+          transfers: [ [Object] ],
+          signatures: [ [Object] ] },
+        SignedTransaction {
+          schema: Schema { unparsedFields: [Object], fields: [Object] },
+          block: <BN: 5>,
+          transfers: [ [Object] ],
+          signatures: [ [Object] ] },
+        SignedTransaction {
+          schema: Schema { unparsedFields: [Object], fields: [Object] },
+          block: <BN: 2>,
+          transfers: [ [Object] ],
+          signatures: [ [Object] ] } ]
+
 ------------------------------------------------------------------------------
 
 getCurrentBlock
@@ -126,6 +197,16 @@ Returns
 
 ``Promise<number>``: Current block number.
 
+-------
+Example
+-------
+
+.. code-block:: javascript
+
+    const currentBlock = await operator.getCurrentBlock()
+    console.log(currentBlock)
+    > 6
+
 ------------------------------------------------------------------------------
 
 submitBlock
@@ -138,3 +219,13 @@ submitBlock
 Attempts to force the operator to submit a block.
 If the operator is properly configured, it won't let you do this.
 Usually used for testing locally.
+
+-------
+Example
+-------
+
+.. code-block:: javascript
+
+    const submittedBlock = await operator.submitBlock()
+    console.log(submittedBlock)
+    > 7

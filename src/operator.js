@@ -1,5 +1,7 @@
 const utils = require('plasma-utils')
 const BaseClient = require('./base-client')
+const models = utils.serialization.models
+const SignedTransaction = models.SignedTransaction
 
 /**
  * Wrapper for interacting with the operator.
@@ -37,7 +39,8 @@ class OperatorClient extends BaseClient {
    */
   async getTransaction (hash) {
     hash = utils.utils.remove0x(hash)
-    return this.provider.handle('getTxFromHash', [hash], true)
+    const tx = await this.provider.handle('getTxFromHash', [hash], true)
+    return new SignedTransaction(tx)
   }
 
   /**
@@ -47,7 +50,19 @@ class OperatorClient extends BaseClient {
    * @return {Array<SignedTransaction>} List of most recent transactions.
    */
   async getRecentTransactions (start, end) {
-    return this.provider.handle('getRecentTransactions', [start, end], true)
+    const txs = await this.provider.handle(
+      'getRecentTransactions',
+      [start, end],
+      true
+    )
+
+    return txs
+      .filter((tx) => {
+        return !utils.utils.isString(tx)
+      })
+      .map((tx) => {
+        return new SignedTransaction(tx)
+      })
   }
 
   /**
@@ -55,14 +70,17 @@ class OperatorClient extends BaseClient {
    * @return {number} The current block number.
    */
   async getCurrentBlock () {
-    return this.provider.handle('getBlockNumber', [], true)
+    const currentBlock = await this.provider.handle('getBlockNumber', [], true)
+    return parseInt(currentBlock)
   }
 
   /**
    * Submits the current block to the root chain.
+   * @return {number} Number of the submitted block.
    */
   async submitBlock () {
-    return this.provider.handle('newBlock')
+    const response = await this.provider.handle('newBlock')
+    return parseInt(response.newBlockNumber)
   }
 }
 

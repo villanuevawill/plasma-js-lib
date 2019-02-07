@@ -29,7 +29,7 @@ class PlasmaClient extends BaseClient {
   /**
    * Returns the balances of an account.
    * @param {string} address Address of the account to query.
-   * @return {*} A list of account balances.
+   * @return {Object} A mapping of tokens to balances.
    */
   async getBalances (address) {
     let balances = await this.provider.handle('pg_getBalances', [address])
@@ -50,8 +50,8 @@ class PlasmaClient extends BaseClient {
 
   /**
    * Returns a transaction with the given hash.
-   * @param {String} hash Hash of the transaction to query.
-   * @return {*} The transaction object.
+   * @param {string} hash Hash of the transaction to query.
+   * @return {SignedTransaction} The transaction object.
    */
   async getTransaction (hash) {
     const encoded = await this.provider.handle('pg_getTransaction', [hash])
@@ -60,7 +60,7 @@ class PlasmaClient extends BaseClient {
 
   /**
    * Returns information about a specific block.
-   * @param {Number} block Number of the block to query.
+   * @param {number} block Number of the block to query.
    * @return {string} Hash of the block.
    */
   async getBlock (block) {
@@ -69,7 +69,7 @@ class PlasmaClient extends BaseClient {
 
   /**
    * Returns the current block height.
-   * @return {Number} Block height.
+   * @return {number} Block height.
    */
   async getCurrentBlock () {
     return this.provider.handle('pg_getCurrentBlock')
@@ -77,7 +77,7 @@ class PlasmaClient extends BaseClient {
 
   /**
    * Returns the next plasma block number.
-   * @return {BigNum} The next block number.
+   * @return {number} The next block number.
    */
   async getNextBlock () {
     return this.provider.handle('pg_getNextBlock')
@@ -103,7 +103,7 @@ class PlasmaClient extends BaseClient {
    * Signs a message.
    * @param {string} address Address to sign with.
    * @param {string} data Message to sign.
-   * @return {*} The signed message.
+   * @return {EthereumSignature} The signed message.
    */
   async sign (address, data) {
     return this.provider.handle('pg_sign', [address, data])
@@ -111,9 +111,9 @@ class PlasmaClient extends BaseClient {
 
   /**
    * Submits a deposit.
-   * @param {*} token Token to deposit.
-   * @param {*} amount Amount to deposit.
-   * @param {*} address Address to deposit to.
+   * @param {string} token Token to deposit.
+   * @param {BigNum} amount Amount to deposit.
+   * @param {string} address Address to deposit to.
    */
   async deposit (token, amount, address) {
     if (!utils.utils.web3Utils.isAddress(address)) {
@@ -126,8 +126,8 @@ class PlasmaClient extends BaseClient {
   /**
    * Picks the best ranges for a given transaction.
    * @param {string} address Address to transact from.
-   * @param {*} token Token being sent.
-   * @param {*} amount Amount being sent.
+   * @param {string} token Token being sent.
+   * @param {BigNum} amount Amount being sent.
    * @return {Array<Range>} List of ranges that cover the transaction.
    */
   async pickRanges (address, token, amount) {
@@ -147,8 +147,8 @@ class PlasmaClient extends BaseClient {
    * Sends a transaction and picks ranges automatically.
    * @param {string} from Address to send from.
    * @param {string} to Address to send to.
-   * @param {*} token Token to send.
-   * @param {*} amount Amount to send.
+   * @param {string} token Token to send.
+   * @param {BigNum} amount Amount to send.
    * @return {string} The transaction receipt.
    */
   async sendTransaction (from, to, token, amount) {
@@ -178,8 +178,8 @@ class PlasmaClient extends BaseClient {
    * Starts an exit for a user.
    * May start more than one exit if user's ranges are broken up.
    * @param {string} address Address to withdraw from.
-   * @param {*} token Token to withdraw.
-   * @param {*} amount Amount to withdraw.
+   * @param {string} token Token to withdraw.
+   * @param {BigNum} amount Amount to withdraw.
    * @return {Array<string>} Hashes of the Ethereum exit transactions.
    */
   async startExit (address, token, amount) {
@@ -200,7 +200,7 @@ class PlasmaClient extends BaseClient {
   /**
    * Lists a token so it can be deposited.
    * @param {string} tokenAddress Address of the token's contract.
-   * @return {*} The Ethereum transaction result.
+   * @return {EthereumTransaction} The Ethereum transaction result.
    */
   async listToken (tokenAddress) {
     return this.provider.handle('pg_listToken', [tokenAddress])
