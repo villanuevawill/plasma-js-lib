@@ -48991,13 +48991,21 @@ function extend() {
 }
 
 },{}],465:[function(require,module,exports){
-const DefaultProvider = require('./providers').DefaultProvider
+const HttpProvider = require('./providers').HttpProvider
 
 /**
  * Base class that client wrappers extend.
  */
 class BaseClient {
-  constructor (provider = new DefaultProvider()) {
+  constructor (provider) {
+    if (provider === undefined) {
+      provider = new HttpProvider()
+    }
+    if (provider instanceof String || typeof provider === 'string') {
+      provider = new HttpProvider({
+        endpoint: provider
+      })
+    }
     this.provider = provider
   }
 }
@@ -49009,6 +49017,7 @@ const BigNum = require('bn.js')
 const utils = require('plasma-utils')
 const BaseClient = require('./base-client')
 const models = utils.serialization.models
+const SignedTransaction = models.SignedTransaction
 const UnsignedTransaction = models.UnsignedTransaction
 
 /**
@@ -49060,7 +49069,8 @@ class PlasmaClient extends BaseClient {
    * @return {*} The transaction object.
    */
   async getTransaction (hash) {
-    return this.provider.handle('pg_getTransaction', [hash])
+    const encoded = await this.provider.handle('pg_getTransaction', [hash])
+    return new SignedTransaction(encoded)
   }
 
   /**
@@ -49069,15 +49079,15 @@ class PlasmaClient extends BaseClient {
    * @return {string} Hash of the block.
    */
   async getBlock (block) {
-    return this.provider.handle('pg_getBlock', [block])
+    return this.provider.handle('pg_getBlockHeader', [block])
   }
 
   /**
    * Returns the current block height.
    * @return {Number} Block height.
    */
-  async getHeight () {
-    return this.provider.handle('pg_getHeight')
+  async getCurrentBlock () {
+    return this.provider.handle('pg_getCurrentBlock')
   }
 
   /**
@@ -49226,7 +49236,7 @@ class OperatorClient extends BaseClient {
    * Gets block metadata for several blocks.
    * @param {number} start First block to query.
    * @param {number} end Last block to query.
-   * @return {Array<*>} A list of block metadata objects.
+   * @return {Array} A list of block metadata objects.
    */
   async getBlockMetadata (start, end = start) {
     return this.provider.handle('getBlockMetadata', [start, end], true)
@@ -49237,6 +49247,7 @@ class OperatorClient extends BaseClient {
    * @param {number} block Number of the block to query.
    * @param {number} start First transaction to query.
    * @param {number} end Last transaction to query.
+   * @return {Array} List of transactions.
    */
   async getBlockTransactions (block, start, end) {
     return this.provider.handle(
@@ -49244,13 +49255,6 @@ class OperatorClient extends BaseClient {
       [block, start, end],
       true
     )
-  }
-
-  /**
-   * Submits a block to the root chain.
-   */
-  async submitBlock () {
-    return this.provider.handle('pg_submitBlock')
   }
 
   /**
@@ -49279,6 +49283,13 @@ class OperatorClient extends BaseClient {
    */
   async getCurrentBlock () {
     return this.provider.handle('getBlockNumber', [], true)
+  }
+
+  /**
+   * Submits the current block to the root chain.
+   */
+  async submitBlock () {
+    return this.provider.handle('newBlock')
   }
 }
 

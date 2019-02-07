@@ -2,6 +2,7 @@ const BigNum = require('bn.js')
 const utils = require('plasma-utils')
 const BaseClient = require('./base-client')
 const models = utils.serialization.models
+const SignedTransaction = models.SignedTransaction
 const UnsignedTransaction = models.UnsignedTransaction
 
 /**
@@ -53,7 +54,8 @@ class PlasmaClient extends BaseClient {
    * @return {*} The transaction object.
    */
   async getTransaction (hash) {
-    return this.provider.handle('pg_getTransaction', [hash])
+    const encoded = await this.provider.handle('pg_getTransaction', [hash])
+    return new SignedTransaction(encoded)
   }
 
   /**
@@ -62,15 +64,15 @@ class PlasmaClient extends BaseClient {
    * @return {string} Hash of the block.
    */
   async getBlock (block) {
-    return this.provider.handle('pg_getBlock', [block])
+    return this.provider.handle('pg_getBlockHeader', [block])
   }
 
   /**
    * Returns the current block height.
    * @return {Number} Block height.
    */
-  async getHeight () {
-    return this.provider.handle('pg_getHeight')
+  async getCurrentBlock () {
+    return this.provider.handle('pg_getCurrentBlock')
   }
 
   /**

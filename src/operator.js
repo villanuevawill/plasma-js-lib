@@ -9,7 +9,7 @@ class OperatorClient extends BaseClient {
    * Gets block metadata for several blocks.
    * @param {number} start First block to query.
    * @param {number} end Last block to query.
-   * @return {Array<*>} A list of block metadata objects.
+   * @return {Array} A list of block metadata objects.
    */
   async getBlockMetadata (start, end = start) {
     return this.provider.handle('getBlockMetadata', [start, end], true)
@@ -20,6 +20,7 @@ class OperatorClient extends BaseClient {
    * @param {number} block Number of the block to query.
    * @param {number} start First transaction to query.
    * @param {number} end Last transaction to query.
+   * @return {Array} List of transactions.
    */
   async getBlockTransactions (block, start, end) {
     return this.provider.handle(
@@ -61,7 +62,7 @@ class OperatorClient extends BaseClient {
    * Submits the current block to the root chain.
    */
   async submitBlock () {
-    return this.provider.handle('pg_submitBlock')
+    return this.provider.handle('newBlock')
   }
 }
 
