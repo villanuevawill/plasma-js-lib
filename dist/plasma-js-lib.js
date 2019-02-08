@@ -49220,6 +49220,16 @@ class PlasmaClient extends BaseClient {
   async listToken (tokenAddress) {
     return this.provider.handle('pg_listToken', [tokenAddress])
   }
+
+  /**
+   * Asks that the operator submit the current block to the root chain.
+   * Usually used for testing
+   * @return {number} Number of the submitted block.
+   */
+  async submitBlock () {
+    const response = await this.provider.handle('pg_submitBlock')
+    return parseInt(response.newBlockNumber)
+  }
 }
 
 module.exports = PlasmaClient
@@ -49277,13 +49287,19 @@ class OperatorClient extends BaseClient {
    * @return {Array<SignedTransaction>} List of most recent transactions.
    */
   async getRecentTransactions (start, end) {
-    const txs = await this.provider.handle('getRecentTransactions', [start, end], true)
+    const txs = await this.provider.handle(
+      'getRecentTransactions',
+      [start, end],
+      true
+    )
 
-    return txs.filter((tx) => {
-      return !utils.utils.isString(tx)
-    }).map((tx) => {
-      return new SignedTransaction(tx)
-    })
+    return txs
+      .filter((tx) => {
+        return !utils.utils.isString(tx)
+      })
+      .map((tx) => {
+        return new SignedTransaction(tx)
+      })
   }
 
   /**
