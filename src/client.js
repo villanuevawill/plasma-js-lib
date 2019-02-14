@@ -93,6 +93,31 @@ class PlasmaClient extends BaseClient {
   }
 
   /**
+   * Returns the ETH balance of an account.
+   * Queries the main chain, *not* the plasma chain.
+   * @param {string} address Address to query.
+   * @return {BigNum} Balance of the address.
+   */
+  async getEthBalance (address) {
+    const balance = await this.provider.handle('pg_getEthBalance', [address])
+    return new BigNum(balance, 'hex')
+  }
+
+  /**
+   * @return {number} The latest Ethereum block.
+   */
+  async getCurrentEthBlock () {
+    return this.provider.handle('pg_getCurrentEthBlock')
+  }
+
+  /**
+   * @return {number} The last block that the client has synced.
+   */
+  async getLastSyncedBlock () {
+    return this.provider.handle('pg_getLastSyncedBlock')
+  }
+
+  /**
    * Creates a new account.
    */
   async createAccount () {
