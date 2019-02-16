@@ -1,6 +1,6 @@
 {
   "name": "plasma-js-lib",
-  "version": "0.0.4-beta.8",
+  "version": "0.0.4-beta.9",
   "description": "PG Plasma JS client library",
   "main": "index.js",
   "scripts": {
