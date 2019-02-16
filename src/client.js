@@ -125,6 +125,13 @@ class PlasmaClient extends BaseClient {
   }
 
   /**
+   * monitors a new account.
+   */
+  async monitorAccount (address) {
+    return this.provider.handle('pg_monitorAccount', [address])
+  }
+
+  /**
    * Signs a message.
    * @param {string} address Address to sign with.
    * @param {string} data Message to sign.
