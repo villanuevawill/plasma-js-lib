@@ -125,6 +125,13 @@ class PlasmaClient extends BaseClient {
   }
 
   /**
+   * monitors a new account.
+   */
+  async monitorAccount (address) {
+    return this.provider.handle('pg_monitorAccount', [address])
+  }
+
+  /**
    * Signs a message.
    * @param {string} address Address to sign with.
    * @param {string} data Message to sign.
@@ -132,6 +139,16 @@ class PlasmaClient extends BaseClient {
    */
   async sign (address, data) {
     return this.provider.handle('pg_sign', [address, data])
+  }
+
+  /**
+   * Malicious Sign
+   * @param {string} address Address to sign with.
+   * @param {string} data Message to sign.
+   * @return {EthereumSignature} The signed message.
+   */
+  async maliciousSign (address, data) {
+    return this.provider.handle('pg_maliciousSign', [address, data])
   }
 
   /**
@@ -197,6 +214,43 @@ class PlasmaClient extends BaseClient {
       return signature
     })
     return this.sendRawTransaction(transaction)
+  }
+
+  /**
+   * Easier in the demo to send a malicious transaction from
+   * a malicious node. In the future, better to just put a function
+   * in the mock node
+   * @param {string} from Address to send from.
+   * @param {string} to Address to send to.
+   * @param {string} token Token to send.
+   * @param {BigNum} amount Amount to send.
+   * @return {string} The transaction receipt.
+   */
+  async sendMaliciousTransaction (from, to, token, amount) {
+    token = toHexString(token)
+    amount = toHexString(amount)
+
+    const ranges = await this.pickRanges(from, token, amount)
+    const nextBlock = await this.getNextBlock()
+    const transaction = {
+      block: nextBlock,
+      transfers: ranges.map((range) => {
+        return {
+          ...range,
+          ...{ sender: from, recipient: to }
+        }
+      })
+    }
+    const hash = new UnsignedTransaction(transaction).hash
+    const signature = await this.maliciousSign(from, hash)
+    transaction.signatures = ranges.map(() => {
+      return signature
+    })
+    return this.sendRawTransaction(transaction)
+  }
+
+  async getMaliciousTransactions (address) {
+    return this.provider.handle('pg_getMaliciousTransactions', [address])
   }
 
   /**
